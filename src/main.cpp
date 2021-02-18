@@ -9,9 +9,23 @@ int main(int argc, char** argv) {
     }
     char* algoritmoSubstituicao = argv[1];
     char* arquivoEntrada = argv[2];
-    int tamanhoPagina = atoi(argv[3]);
-    int tamanhoMemoria = atoi(argv[4]);
+    unsigned tamanhoPagina = atoi(argv[3]);
+    unsigned tamanhoMemoria = atoi(argv[4]);
     bool debug = argc == 5;
     
+    FILE* arquivo = fopen(arquivoEntrada, "r");
+
+    unsigned endereco;
+    char rw;
+
+    while(fscanf(arquivo, "%x %c", &endereco, &rw) != EOF) {
+        unsigned s = 0, temp = tamanhoPagina;
+        while (temp > 1) {
+            temp = temp >> 1;
+            s++;
+        }
+        //Tratar ação
+    }
+
     return 0;
 }
