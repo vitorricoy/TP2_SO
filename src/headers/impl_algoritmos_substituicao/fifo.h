@@ -5,7 +5,8 @@ class FIFO : AlgoritmoSubstituicao {
         
         FIFO();
 
-        
+        void determinaPagina();
+
     private:
 
 };

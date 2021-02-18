@@ -3,7 +3,8 @@ class AlgoritmoSubstituicao {
         
         AlgoritmoSubstituicao();
 
-        
+        virtual void determinaPagina() = 0;
+
     private:
 
 };

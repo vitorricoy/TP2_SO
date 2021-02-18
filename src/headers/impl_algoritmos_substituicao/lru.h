@@ -5,6 +5,7 @@ class LRU : AlgoritmoSubstituicao {
         
         LRU();
 
+        void determinaPagina();
         
     private:
 

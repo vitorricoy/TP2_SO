@@ -5,7 +5,8 @@ class Novo : AlgoritmoSubstituicao {
         
         Novo();
 
-        
+        void determinaPagina();
+
     private:
 
 };
