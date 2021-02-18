@@ -5,6 +5,8 @@ class SegundaChance : AlgoritmoSubstituicao {
         
         SegundaChance();
 
+        void determinaPagina();
+
         
     private:
 
