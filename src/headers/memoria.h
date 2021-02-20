@@ -3,6 +3,10 @@ class Memoria {
 
         Memoria();
 
-    private:
+        void lerDados();
+        
+        void escreverDados();
 
+    private:
+        bool debug;
 };

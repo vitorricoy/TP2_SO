@@ -1,6 +1,6 @@
 #include "algoritmo_substituicao.h"
 
-class LRU : AlgoritmoSubstituicao {
+class LRU : public AlgoritmoSubstituicao {
     public:
         
         LRU();

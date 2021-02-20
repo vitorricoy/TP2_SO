@@ -5,6 +5,6 @@ class AlgoritmoSubstituicao {
 
         virtual void determinaPagina() = 0;
 
-    private:
-
+    protected:
+        bool debug;
 };

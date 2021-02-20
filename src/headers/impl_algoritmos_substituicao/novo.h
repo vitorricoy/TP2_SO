@@ -1,6 +1,6 @@
 #include "algoritmo_substituicao.h"
 
-class Novo : AlgoritmoSubstituicao {
+class Novo : public AlgoritmoSubstituicao {
     public:
         
         Novo();

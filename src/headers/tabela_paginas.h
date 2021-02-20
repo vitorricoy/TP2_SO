@@ -4,10 +4,14 @@
 class TabelaPaginas {
     public:
 
-        TabelaPaginas(int tamanhoPagina, int tamanhoMemoria, AlgoritmoSubstituicao algoritmo);
+        TabelaPaginas(unsigned tamanhoPagina, unsigned tamanhoMemoria, AlgoritmoSubstituicao* algoritmo, bool debug);
+
+        bool lerEndereco(unsigned endereco);
+        bool escreverEndereco(unsigned endereco);
 
 
     private:
         Memoria memoria;
-        AlgoritmoSubstituicao algoritmoSubstituicao;
+        AlgoritmoSubstituicao* algoritmoSubstituicao;
+        bool debug;
 };

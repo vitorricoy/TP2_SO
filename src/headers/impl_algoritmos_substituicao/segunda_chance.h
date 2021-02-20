@@ -1,6 +1,6 @@
 #include "algoritmo_substituicao.h"
 
-class SegundaChance : AlgoritmoSubstituicao {
+class SegundaChance : public AlgoritmoSubstituicao {
     public:
         
         SegundaChance();

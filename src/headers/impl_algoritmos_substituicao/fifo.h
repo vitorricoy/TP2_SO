@@ -1,6 +1,6 @@
 #include "algoritmo_substituicao.h"
 
-class FIFO : AlgoritmoSubstituicao {
+class FIFO : public AlgoritmoSubstituicao {
     public:
         
         FIFO();
