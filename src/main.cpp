@@ -2,12 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "tabela_paginas.h"
-#include "algoritmo_substituicao.h"
-#include "fifo.h"
-#include "lru.h"
-#include "novo.h"
-#include "segunda_chance.h"
+#include "headers/tabela_paginas.h"
+#include "headers/algoritmo_substituicao.h"
+#include "headers/impl_algoritmos_substituicao/fifo.h"
+#include "headers/impl_algoritmos_substituicao/lru.h"
+#include "headers/impl_algoritmos_substituicao/novo.h"
+#include "headers/impl_algoritmos_substituicao/segunda_chance.h"
 
 
 int main(int argc, char** argv) {
@@ -23,8 +23,12 @@ int main(int argc, char** argv) {
     
     FILE* arquivo = fopen(arquivoEntrada, "r");
 
-    unsigned endereco;
-    char rw;
+    unsigned bitsPagina = 0, temp = tamanhoPagina;
+    while (temp > 1) {
+        temp = temp >> 1;
+        bitsPagina++;
+    }
+    unsigned numeroPaginas = (1 << (32-bitsPagina));
 
     AlgoritmoSubstituicao* algoritmoSub;
 
@@ -44,19 +48,19 @@ int main(int argc, char** argv) {
         algoritmoSub = new Novo();
     }
 
-    TabelaPaginas tabela(tamanhoPagina, tamanhoMemoria, algoritmoSub, debug);
+    MemoriaFisica memoria(tamanhoMemoria);
+    TabelaPaginas tabela(tamanhoPagina, numeroPaginas, &memoria, algoritmoSub, debug);
+
+    unsigned endereco;
+    char rw;
 
     while(fscanf(arquivo, "%x %c", &endereco, &rw) != EOF) {
-        unsigned s = 0, temp = tamanhoPagina;
-        while (temp > 1) {
-            temp = temp >> 1;
-            s++;
-        }
+        
         //Tratar ação
         if(rw == 'R') { 
-            tabela.lerEndereco(endereco >> s);
+            tabela.lerEndereco((endereco >> bitsPagina));
         } else {
-            tabela.escreverEndereco(endereco >> s);
+            tabela.escreverEndereco((endereco >> bitsPagina));
         }
     }
 

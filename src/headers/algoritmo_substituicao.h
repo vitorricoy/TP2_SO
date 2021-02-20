@@ -1,3 +1,6 @@
+#ifndef TP2_SO_SRC_HEADERS_ALGORITMO_SUBSTITUICAO_H
+#define TP2_SO_SRC_HEADERS_ALGORITMO_SUBSTITUICAO_H
+
 class AlgoritmoSubstituicao {
     public:
         
@@ -8,3 +11,5 @@ class AlgoritmoSubstituicao {
     protected:
         bool debug;
 };
+
+#endif //TP2_SO_SRC_HEADERS_ALGORITMO_SUBSTITUICAO_H
