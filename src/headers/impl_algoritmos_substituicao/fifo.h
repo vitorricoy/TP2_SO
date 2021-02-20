@@ -6,7 +6,7 @@
 class FIFO : public AlgoritmoSubstituicao {
     public:
         
-        FIFO();
+        FIFO(MemoriaFisica* memoriaFisica);
 
         void determinaPagina();
 

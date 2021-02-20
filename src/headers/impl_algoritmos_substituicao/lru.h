@@ -6,7 +6,7 @@
 class LRU : public AlgoritmoSubstituicao {
     public:
         
-        LRU();
+        LRU(MemoriaFisica* memoriaFisica);
 
         void determinaPagina();
         

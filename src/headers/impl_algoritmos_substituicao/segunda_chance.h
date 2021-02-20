@@ -6,7 +6,7 @@
 class SegundaChance : public AlgoritmoSubstituicao {
     public:
         
-        SegundaChance();
+        SegundaChance(MemoriaFisica* memoriaFisica);
 
         void determinaPagina();
 

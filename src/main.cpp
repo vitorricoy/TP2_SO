@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "headers/tabela_paginas.h"
+#include "headers/mmu.h"
 #include "headers/algoritmo_substituicao.h"
 #include "headers/impl_algoritmos_substituicao/fifo.h"
 #include "headers/impl_algoritmos_substituicao/lru.h"
@@ -30,26 +30,27 @@ int main(int argc, char** argv) {
     }
     unsigned numeroPaginas = (1 << (32-bitsPagina));
 
+    MemoriaFisica memoria(tamanhoMemoria, tamanhoPagina, numeroPaginas, debug);
+
     AlgoritmoSubstituicao* algoritmoSub;
 
     if(strcmp(algoritmoSubstituicao, "lru")) {
-        algoritmoSub = new LRU();
+        algoritmoSub = new LRU(&memoria);
     }
     
     if(strcmp(algoritmoSubstituicao, "2a")) {
-        algoritmoSub = new SegundaChance();
+        algoritmoSub = new SegundaChance(&memoria);
     }
     
     if(strcmp(algoritmoSubstituicao, "fifo")) {
-        algoritmoSub = new FIFO();
+        algoritmoSub = new FIFO(&memoria);
     }
     
     if(strcmp(algoritmoSubstituicao, "novo")) {
-        algoritmoSub = new Novo();
+        algoritmoSub = new Novo(&memoria);
     }
 
-    MemoriaFisica memoria(tamanhoMemoria);
-    TabelaPaginas tabela(tamanhoPagina, numeroPaginas, &memoria, algoritmoSub, debug);
+    MMU gerenciadorMemoria(&memoria, algoritmoSub, debug);
 
     unsigned endereco;
     char rw;
@@ -58,9 +59,9 @@ int main(int argc, char** argv) {
         
         //Tratar ação
         if(rw == 'R') { 
-            tabela.lerEndereco((endereco >> bitsPagina));
+            gerenciadorMemoria.lerEndereco((endereco >> bitsPagina));
         } else {
-            tabela.escreverEndereco((endereco >> bitsPagina));
+            gerenciadorMemoria.escreverEndereco((endereco >> bitsPagina));
         }
     }
 

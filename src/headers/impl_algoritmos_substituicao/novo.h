@@ -6,7 +6,7 @@
 class Novo : public AlgoritmoSubstituicao {
     public:
         
-        Novo();
+        Novo(MemoriaFisica* memoriaFisica);
 
         void determinaPagina();
 

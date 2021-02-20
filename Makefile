@@ -2,11 +2,11 @@ CC=g++
 CFLAGS=-std=c++11 -Wall -Wextra -Wno-unused-parameter
 EXEC=tp2virtual
 
-$(EXEC): src/main.cpp tabela_paginas.o entrada_tabela.o memoria_fisica.o algoritmo_substituicao.o fifo.o lru.o novo.o segunda_chance.o
-	$(CC) $(CFLAGS) src/main.cpp tabela_paginas.o entrada_tabela.o memoria_fisica.o algoritmo_substituicao.o fifo.o lru.o novo.o segunda_chance.o -o $(EXEC)
+$(EXEC): src/main.cpp mmu.o entrada_tabela.o memoria_fisica.o algoritmo_substituicao.o fifo.o lru.o novo.o segunda_chance.o
+	$(CC) $(CFLAGS) src/main.cpp mmu.o entrada_tabela.o memoria_fisica.o algoritmo_substituicao.o fifo.o lru.o novo.o segunda_chance.o -o $(EXEC)
 
-tabela_paginas.o: src/headers/tabela_paginas.cpp
-	$(CC) $(CFLAGS) -c src/headers/tabela_paginas.cpp -o tabela_paginas.o
+mmu.o: src/headers/mmu.cpp
+	$(CC) $(CFLAGS) -c src/headers/mmu.cpp -o mmu.o
 
 entrada_tabela.o: src/headers/entrada_tabela.cpp
 	$(CC) $(CFLAGS) -c src/headers/entrada_tabela.cpp -o entrada_tabela.o
