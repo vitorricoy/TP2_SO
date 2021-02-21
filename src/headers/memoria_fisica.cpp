@@ -10,3 +10,19 @@ MemoriaFisica::MemoriaFisica(unsigned tamanhoMemoria, unsigned tamanhoPagina, un
 MemoriaFisica::~MemoriaFisica() {
     free(this->tabelaPaginas);
 }
+
+bool MemoriaFisica::enderecoEstaValido(unsigned endereco) {
+    return tabelaPaginas[endereco].estaValido();
+}
+
+bool MemoriaFisica::enderecoEstaSujo(unsigned endereco) {
+    return tabelaPaginas[endereco].estaSujo();
+}
+
+void MemoriaFisica::setEnderecoValido(unsigned endereco, bool valido) {
+    tabelaPaginas[endereco].setValido(valido);
+}
+
+void MemoriaFisica::setEnderecoSujo(unsigned endereco, bool sujo) {
+    tabelaPaginas[endereco].setSujo(sujo);
+}

@@ -8,6 +8,12 @@ class MemoriaFisica {
         MemoriaFisica(unsigned tamanhoMemoria, unsigned tamanhoPagina, unsigned numeroPaginas, bool debug);
         ~MemoriaFisica();
 
+        bool enderecoEstaValido(unsigned endereco);
+        bool enderecoEstaSujo(unsigned endereco);
+
+        void setEnderecoValido(unsigned endereco, bool valido);
+        void setEnderecoSujo(unsigned endereco, bool sujo);
+
     private:
         unsigned tamanhoMemoria;
         EntradaTabela* tabelaPaginas;

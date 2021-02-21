@@ -1,12 +1,15 @@
 #ifndef TP2_SO_SRC_HEADERS_ALGORITMO_SUBSTITUICAO_H
 #define TP2_SO_SRC_HEADERS_ALGORITMO_SUBSTITUICAO_H
 
+#include "entrada_tabela.h"
+#include "memoria_fisica.h"
+
 class AlgoritmoSubstituicao {
     public:
         
         AlgoritmoSubstituicao(MemoriaFisica* memoriaFisica);
 
-        virtual void determinaPagina() = 0;
+        virtual EntradaTabela determinaPagina() = 0;
 
         bool precisaDeSubstituicao();
 

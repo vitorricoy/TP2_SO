@@ -9,7 +9,7 @@
 class MMU {
     public:
 
-        MMU(MemoriaFisica* memoriaFisica, AlgoritmoSubstituicao* algoritmo, bool debug);
+        MMU(MemoriaFisica* memoriaFisica, unsigned* contadorPaginasSujas, AlgoritmoSubstituicao* algoritmo, bool debug);
         
         bool lerEndereco(unsigned endereco);
         bool escreverEndereco(unsigned endereco);
@@ -19,6 +19,7 @@ class MMU {
     private:
         AlgoritmoSubstituicao* algoritmoSubstituicao;
         MemoriaFisica* memoriaFisica;
+        unsigned* contadorPaginasSujas;
         bool debug;
 };
 

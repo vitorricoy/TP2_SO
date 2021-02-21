@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #include "headers/mmu.h"
 #include "headers/algoritmo_substituicao.h"
@@ -50,20 +51,48 @@ int main(int argc, char** argv) {
         algoritmoSub = new Novo(&memoria);
     }
 
-    MMU gerenciadorMemoria(&memoria, algoritmoSub, debug);
+    unsigned contadorPaginasSujas = 0;
+
+    MMU gerenciadorMemoria(&memoria, &contadorPaginasSujas, algoritmoSub, debug);
 
     unsigned endereco;
     char rw;
 
+    unsigned contadorLeituras = 0;
+    unsigned contadorEscritas = 0;
+    unsigned contadorPageFaults = 0;
+
+    printf("Executando o simulador...\n");
+     
+    clock_t inicio = clock();
+
     while(fscanf(arquivo, "%x %c", &endereco, &rw) != EOF) {
-        
         //Tratar ação
+        bool pageFault = false;
         if(rw == 'R') { 
-            gerenciadorMemoria.lerEndereco((endereco >> bitsPagina));
+            contadorLeituras++;
+            pageFault = gerenciadorMemoria.lerEndereco((endereco >> bitsPagina));
         } else {
-            gerenciadorMemoria.escreverEndereco((endereco >> bitsPagina));
+            contadorEscritas++;
+            pageFault = gerenciadorMemoria.escreverEndereco((endereco >> bitsPagina));
+        }
+        if(pageFault) {
+            contadorPageFaults++;
         }
     }
 
+    clock_t fim = clock();
+    double tempoGasto = ((double) (fim - inicio)) / CLOCKS_PER_SEC;
+
+    printf("Arquivo de Entrada: %s\n", arquivoEntrada);
+    printf("Tamanho da Memoria: %u KB\n", tamanhoMemoria);
+    printf("Tamanho das paginas: %u KB\n", tamanhoPagina);
+    printf("Tecnica de reposicao: %s\n", algoritmoSubstituicao);
+    printf("Paginas lidas: %u\n", contadorLeituras);
+    printf("Paginas escritas: %u\n", contadorEscritas);
+    printf("Paginas sujas: %u\n", contadorPaginasSujas);
+    printf("Tempo de Execucao: %lf\n", tempoGasto);
+    printf("Tabela:\n");
+    //Ver como seria a tabela
     return 0;
 }
