@@ -66,6 +66,8 @@ int main(int argc, char** argv) {
      
     clock_t inicio = clock();
 
+    
+
     while(fscanf(arquivo, "%x %c", &endereco, &rw) != EOF) {
         //Tratar ação
         bool pageFault = false;

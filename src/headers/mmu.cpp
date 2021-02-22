@@ -14,7 +14,7 @@ bool MMU::lerEndereco(unsigned endereco) {
     if(this->memoriaFisica->enderecoEstaValido(endereco)) {
         return false;
     } else {
-        this->buscaPaginaParaMemoria(endereco);
+        this->buscaPaginaParaMemoria(endereco, false);
         return true;
     }
 }
@@ -24,13 +24,13 @@ bool MMU::escreverEndereco(unsigned endereco) {
         this->memoriaFisica->setEnderecoSujo(endereco, true);
         return false;
     } else {
-        this->buscaPaginaParaMemoria(endereco);
+        this->buscaPaginaParaMemoria(endereco, true);
         this->memoriaFisica->setEnderecoSujo(endereco, true);
         return true;
     }
 }
 
-void MMU::buscaPaginaParaMemoria(unsigned endereco) {
+void MMU::buscaPaginaParaMemoria(unsigned endereco, bool escrita) {
     // Ver melhor quando juntar as partes
     bool sucesso = memoriaFisica->colocaPaginaMemoria(endereco);
     if(!sucesso) {

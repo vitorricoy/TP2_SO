@@ -14,9 +14,10 @@ class MMU {
         bool lerEndereco(unsigned endereco);
         bool escreverEndereco(unsigned endereco);
         
-        void buscaPaginaParaMemoria(unsigned endereco);
 
     private:
+        
+        void buscaPaginaParaMemoria(unsigned endereco, bool escrita);
         AlgoritmoSubstituicao* algoritmoSubstituicao;
         MemoriaFisica* memoriaFisica;
         unsigned* contadorPaginasSujas;
