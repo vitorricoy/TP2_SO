@@ -11,8 +11,6 @@ class AlgoritmoSubstituicao {
 
         virtual EntradaTabela determinaPagina() = 0;
 
-        bool precisaDeSubstituicao();
-
     protected:
         bool debug;
         MemoriaFisica* memoriaFisica;

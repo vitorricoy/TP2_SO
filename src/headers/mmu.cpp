@@ -32,12 +32,11 @@ bool MMU::escreverEndereco(unsigned endereco) {
 
 void MMU::buscaPaginaParaMemoria(unsigned endereco) {
     // Ver melhor quando juntar as partes
-    if(algoritmoSubstituicao->precisaDeSubstituicao()) {
+    bool sucesso = memoriaFisica->colocaPaginaMemoria(endereco);
+    if(!sucesso) {
         EntradaTabela removida = algoritmoSubstituicao->determinaPagina();
         if(removida.estaSujo()) {
             this->contadorPaginasSujas++;
         }
-    } else {
-
     }
 }

@@ -14,8 +14,12 @@ class MemoriaFisica {
         void setEnderecoValido(unsigned endereco, bool valido);
         void setEnderecoSujo(unsigned endereco, bool sujo);
 
+        bool colocaPaginaMemoria(unsigned endereco);
+
     private:
         unsigned tamanhoMemoria;
+        unsigned paginasOcupadas;
+        unsigned numeroPaginas;
         EntradaTabela* tabelaPaginas;
 };
 
