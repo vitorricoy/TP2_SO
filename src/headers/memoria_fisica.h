@@ -16,6 +16,8 @@ class MemoriaFisica {
 
         bool colocaPaginaMemoria(unsigned endereco);
 
+        void preencherStringTabelaPaginas(char* string);
+
     private:
         unsigned tamanhoMemoria;
         unsigned paginasOcupadas;

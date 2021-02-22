@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <string.h>
 #include "memoria_fisica.h"
 #include "entrada_tabela.h"
 
@@ -37,4 +38,8 @@ bool MemoriaFisica::colocaPaginaMemoria(unsigned endereco) {
 
 void MemoriaFisica::setEnderecoSujo(unsigned endereco, bool sujo) {
     this->tabelaPaginas[endereco].setSujo(sujo);
+}
+
+void MemoriaFisica::preencherStringTabelaPaginas(char* string) {
+    strcat(string, "");
 }

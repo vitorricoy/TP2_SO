@@ -12,24 +12,46 @@
 
 
 int main(int argc, char** argv) {
-    if(argc != 4 && argc != 5) {
+    if(argc != 5 && argc != 6) {
         printf("Argumentos incorretos.");
         return 0;
     }
     char* algoritmoSubstituicao = argv[1];
     char* arquivoEntrada = argv[2];
-    unsigned tamanhoPagina = atoi(argv[3]);
-    unsigned tamanhoMemoria = atoi(argv[4]);
-    bool debug = argc == 5;
-    
-    FILE* arquivo = fopen(arquivoEntrada, "r");
+    unsigned tamanhoPagina = strtoul(argv[3], NULL, 10);
+    unsigned tamanhoMemoria = strtoul(argv[4], NULL, 10);
+    unsigned debug = 0;
+    if(argc == 5) {
+        debug = strtoul(argv[5], NULL, 10);
+    }
 
     unsigned bitsPagina = 0, temp = tamanhoPagina;
     while (temp > 1) {
         temp = temp >> 1;
         bitsPagina++;
     }
+
+    FILE* arquivo = fopen(arquivoEntrada, "r");
+
+    unsigned numeroLinhas = 0;
+
+    for(char c = getc(arquivo); c != EOF; c = getc(arquivo)) {
+        if(c == '\n') {
+            numeroLinhas++;
+        }
+    }
+
+    fclose(arquivo);
+
     unsigned numeroPaginas = (1 << (32-bitsPagina));
+
+    if(debug == 2) { // Imprime a tabela por cada iteração
+        long long custoIteracoes = numeroPaginas * numeroLinhas;
+        if(custoIteracoes > 1e8) {
+            printf("Arquivo de entrada ou numero de paginas muito grandes para executarem o debug detalhado em tempo hábil\n");
+            return 0;
+        }
+    }
 
     MemoriaFisica memoria(tamanhoMemoria, tamanhoPagina, numeroPaginas, debug);
 
@@ -66,7 +88,7 @@ int main(int argc, char** argv) {
      
     clock_t inicio = clock();
 
-    
+    arquivo = fopen(arquivoEntrada, "r");
 
     while(fscanf(arquivo, "%x %c", &endereco, &rw) != EOF) {
         //Tratar ação
