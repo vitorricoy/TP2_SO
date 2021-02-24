@@ -43,6 +43,6 @@ void MemoriaFisica::setEnderecoSujo(unsigned endereco, bool sujo) {
 void MemoriaFisica::preencherStringTabelaPaginas(char* string) {
     sprintf(string, "Pagina     Valido   Sujo   Tempo do Ultimo Acesso\n");
     for(int I=0; I<this->numeroPaginas; I++) {
-        sprintf(string, "%#010x %d        %d      %d\n", I, this->tabelaPaginas[I].estaValido(), this->tabelaPaginas[I].estaSujo(), this->tabelaPaginas[I].getUltimoAcesso());
+        sprintf(string+50*(I+1), "%#010x %d        %d      %d\n", I, this->tabelaPaginas[I].estaValido(), this->tabelaPaginas[I].estaSujo(), this->tabelaPaginas[I].getUltimoAcesso());
     }
 }

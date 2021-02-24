@@ -48,7 +48,7 @@ int main(int argc, char** argv) {
     if(debug == 2) { // Imprime a tabela por cada iteração
         long long custoIteracoes = numeroPaginas * numeroLinhas;
         if(custoIteracoes > 1e8) {
-            printf("Arquivo de entrada ou numero de paginas muito grandes para executarem o debug detalhado em tempo hábil\n");
+            printf("Arquivo de entrada ou numero de paginas muito grandes para executarem o debug detalhado em tempo habil\n");
             return 0;
         }
     }
@@ -88,7 +88,22 @@ int main(int argc, char** argv) {
      
     clock_t inicio = clock();
 
+    char** printsTabelas;
+    unsigned numeroPrintsTabelas = 2;
+    if(debug == 2) {
+        numeroPrintsTabelas = numeroLinhas+1;
+    }
+    printsTabelas = (char**) malloc(numeroPrintsTabelas*sizeof(char*));
+    for(unsigned I=0; I<numeroPrintsTabelas; I++) {
+        // Cada linha da tabela tem 50 caracteres e tem o \0 no fim
+        printsTabelas[I] = (char*) malloc(50*(numeroLinhas+1)*sizeof(char) + sizeof(char));
+    }
+    
     arquivo = fopen(arquivoEntrada, "r");
+
+    memoria.preencherStringTabelaPaginas(printsTabelas[0]);
+
+    unsigned cont = 1;
 
     while(fscanf(arquivo, "%x %c", &endereco, &rw) != EOF) {
         //Tratar ação
@@ -103,7 +118,12 @@ int main(int argc, char** argv) {
         if(pageFault) {
             contadorPageFaults++;
         }
+        if(debug == 2) {
+            memoria.preencherStringTabelaPaginas(printsTabelas[cont++]);
+        }
     }
+
+    memoria.preencherStringTabelaPaginas(printsTabelas[cont]);
 
     clock_t fim = clock();
     double tempoGasto = ((double) (fim - inicio)) / CLOCKS_PER_SEC;
@@ -116,7 +136,21 @@ int main(int argc, char** argv) {
     printf("Paginas escritas: %u\n", contadorEscritas);
     printf("Paginas sujas: %u\n", contadorPaginasSujas);
     printf("Tempo de Execucao: %lf\n", tempoGasto);
-    printf("Tabela:\n");
-    //Ver como seria a tabela
+    printf("Tabelas:\n\n");
+    printf("Tabela Inicio:\n");
+    printf("%s\n", printsTabelas[0]);
+    if(debug == 2) {
+        for(unsigned I=1; I<numeroLinhas; I++) {
+            printf("Tabela após passo %d:\n", I);
+            printf("%s\n", printsTabelas[I]);
+        }
+    }
+    printf("Tabela Fim:\n");
+    printf("%s", printsTabelas[cont]);
+
+    for(unsigned I=0; I<numeroPrintsTabelas; I++) {
+        free(printsTabelas[I]);
+    }
+    free(printsTabelas);
     return 0;
 }
