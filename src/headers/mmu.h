@@ -7,6 +7,6 @@ short MMU_escreverEndereco(unsigned endereco);
 
 void MMU_buscaPaginaParaMemoria(unsigned endereco, short escrita);
 
-unsigned contadorPaginasSujas = 0;
+extern unsigned contadorPaginasSujas;
 
 #endif //TP2_SO_SRC_HEADERS_MMU_H

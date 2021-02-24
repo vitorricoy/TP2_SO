@@ -2,6 +2,8 @@
 #include "memoria_fisica.h"
 #include "entrada_tabela.h"
 
+char* algoritmoSubstituicao;
+
 EntradaTabela AlgoritmoSubstituicao_determinaPagina() {
     EntradaTabela x;
     return x;

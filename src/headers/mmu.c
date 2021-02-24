@@ -4,6 +4,8 @@
 #include "memoria_fisica.h"
 #include "algoritmo_substituicao.h"
 
+unsigned contadorPaginasSujas = 0;
+
 short MMU_lerEndereco(unsigned endereco) {
     if(MemoriaFisica_enderecoEstaValido(endereco)) {
         return 0;

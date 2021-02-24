@@ -3,6 +3,11 @@
 #include "memoria_fisica.h"
 #include "entrada_tabela.h"
 
+unsigned tamanhoMemoria;
+unsigned paginasOcupadas;
+unsigned numeroPaginas;
+EntradaTabela* tabelaPaginas;
+
 void MemoriaFisica_inicializar(unsigned tamMem, unsigned tamPag, unsigned numPag, short dbg){
     tamanhoMemoria = tamMem;
     tabelaPaginas = (EntradaTabela*) malloc(numPag * sizeof(EntradaTabela));
@@ -32,7 +37,11 @@ short MemoriaFisica_colocaPaginaMemoria(unsigned endereco) {
     }
     return 0;
 }
-
+extern unsigned tamanhoMemoria;
+extern unsigned paginasOcupadas;
+extern unsigned numeroPaginas;
+extern EntradaTabela* tabelaPaginas ;
+extern short debug;
 void MemoriaFisica_setEnderecoSujo(unsigned endereco, short sujo) {
     tabelaPaginas[endereco].sujo = sujo;
 }

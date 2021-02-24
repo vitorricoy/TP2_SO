@@ -8,16 +8,18 @@
 #include "headers/memoria_fisica.h"
 
 
+short debug;
+
 int main(int argc, char** argv) {
     if(argc != 5 && argc != 6) {
-        printf("Argumentos incorretos.");
+        printf("Argumentos incorretos.\n");
         return 0;
     }
     char* algoritmoSubstituicao = argv[1];
     char* arquivoEntrada = argv[2];
     unsigned tamanhoPagina = strtoul(argv[3], NULL, 10);
     unsigned tamanhoMemoria = strtoul(argv[4], NULL, 10);
-    unsigned debug = 0;
+    debug = 0;
     if(argc == 5) {
         debug = strtoul(argv[5], NULL, 10);
     }

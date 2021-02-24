@@ -16,10 +16,10 @@ short MemoriaFisica_colocaPaginaMemoria(unsigned endereco);
 
 void MemoriaFisica_preencherStringTabelaPaginas(char* string);
 
-unsigned tamanhoMemoria;
-unsigned paginasOcupadas;
-unsigned numeroPaginas;
-EntradaTabela* tabelaPaginas ;
-short debug;
+extern unsigned tamanhoMemoria;
+extern unsigned paginasOcupadas;
+extern unsigned numeroPaginas;
+extern EntradaTabela* tabelaPaginas ;
+extern short debug;
 
 #endif //TP2_SO_SRC_HEADERS_MEMORIA_FISICA_H
