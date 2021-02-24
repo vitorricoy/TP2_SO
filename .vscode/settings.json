@@ -4,6 +4,7 @@
         "type_traits": "cpp",
         "entrada_tabela.h": "c",
         "algoritmo_substituicao.h": "c",
-        "tabela_paginas.h": "c"
+        "tabela_paginas.h": "c",
+        "lru.h": "c"
     }
 }

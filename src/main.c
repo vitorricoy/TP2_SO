@@ -78,8 +78,8 @@ int main(int argc, char** argv) {
     }
     printsTabelas = (char**) malloc(numeroPrintsTabelas*sizeof(char*));
     for(unsigned I=0; I<numeroPrintsTabelas; I++) {
-        // Cada linha da tabela tem 77 caracteres e tem o \0 no fim
-        printsTabelas[I] = (char*) malloc(77*(numeroLinhas+1)*sizeof(char) + sizeof(char));
+        // Cada linha da tabela tem 81 caracteres e tem o \0 no fim
+        printsTabelas[I] = (char*) malloc(81*(numeroLinhas+1)*sizeof(char) + sizeof(char));
     }
     
     arquivo = fopen(arquivoEntrada, "r");

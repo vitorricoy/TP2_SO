@@ -39,6 +39,7 @@ short TabelaPaginas_colocaPaginaMemoria(unsigned endereco) {
         tabelaPaginas[endereco].sujo = 0;
         tabelaPaginas[endereco].tempoEntrada = contador;
         tabelaPaginas[endereco].ultimoAcesso = contador;
+        tabelaPaginas[endereco].segundaChance = 1;
     }
     return 0;
 }
@@ -50,6 +51,7 @@ void TabelaPaginas_substituiPaginasMemoria(unsigned endereco, unsigned enderecoR
     tabelaPaginas[endereco].sujo = 0;
     tabelaPaginas[endereco].tempoEntrada = contador;
     tabelaPaginas[endereco].ultimoAcesso = contador;
+    tabelaPaginas[endereco].segundaChance = 1;
 }
 
 void TabelaPaginas_setEnderecoSujo(unsigned endereco, short sujo) {
@@ -61,8 +63,8 @@ void TabelaPaginas_atualizarUltimoAcesso(unsigned endereco) {
 }
 
 void TabelaPaginas_preencherStringTabelaPaginas(char* string) {
-    sprintf(string, "Pagina     Valido   Sujo   Tempo Entrada  Referencia  Tempo do Ultimo Acesso\n");
+    sprintf(string, "Pagina     Valido   Sujo   Tempo Entrada  Segunda Chance  Tempo do Ultimo Acesso\n");
     for(unsigned I=0; I<numeroPaginas; I++) {
-        sprintf(string+77*(I+1), "%#010x %d        %d      %-14d  %d           %d\n", I, tabelaPaginas[I].valido, tabelaPaginas[I].sujo, tabelaPaginas[I].tempoEntrada, tabelaPaginas[I].segundaChance, tabelaPaginas[I].ultimoAcesso);
+        sprintf(string+81*(I+1), "%#010x %d        %d      %-14d  %d               %d\n", I, tabelaPaginas[I].valido, tabelaPaginas[I].sujo, tabelaPaginas[I].tempoEntrada, tabelaPaginas[I].segundaChance, tabelaPaginas[I].ultimoAcesso);
     }
 }
