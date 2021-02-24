@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "limits": "cpp",
-        "type_traits": "cpp"
+        "type_traits": "cpp",
+        "entrada_tabela.h": "c",
+        "algoritmo_substituicao.h": "c"
     }
 }

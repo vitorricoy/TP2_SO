@@ -3,26 +3,23 @@
 
 #include "entrada_tabela.h"
 
-class MemoriaFisica {
-    public:
-        MemoriaFisica(unsigned tamanhoMemoria, unsigned tamanhoPagina, unsigned numeroPaginas, bool debug);
-        ~MemoriaFisica();
 
-        bool enderecoEstaValido(unsigned endereco);
-        bool enderecoEstaSujo(unsigned endereco);
+void MemoriaFisica_inicializar(unsigned tamanhoMemoria, unsigned tamanhoPagina, unsigned numeroPaginas, short debug);
 
-        void setEnderecoValido(unsigned endereco, bool valido);
-        void setEnderecoSujo(unsigned endereco, bool sujo);
+short MemoriaFisica_enderecoEstaValido(unsigned endereco);
+short MemoriaFisica_enderecoEstaSujo(unsigned endereco);
 
-        bool colocaPaginaMemoria(unsigned endereco);
+void MemoriaFisica_setEnderecoValido(unsigned endereco, short valido);
+void MemoriaFisica_setEnderecoSujo(unsigned endereco, short sujo);
 
-        void preencherStringTabelaPaginas(char* string);
+short MemoriaFisica_colocaPaginaMemoria(unsigned endereco);
 
-    private:
-        unsigned tamanhoMemoria;
-        unsigned paginasOcupadas;
-        unsigned numeroPaginas;
-        EntradaTabela* tabelaPaginas;
-};
+void MemoriaFisica_preencherStringTabelaPaginas(char* string);
+
+unsigned tamanhoMemoria;
+unsigned paginasOcupadas;
+unsigned numeroPaginas;
+EntradaTabela* tabelaPaginas ;
+short debug;
 
 #endif //TP2_SO_SRC_HEADERS_MEMORIA_FISICA_H

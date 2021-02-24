@@ -4,16 +4,12 @@
 #include "entrada_tabela.h"
 #include "memoria_fisica.h"
 
-class AlgoritmoSubstituicao {
-    public:
-        
-        AlgoritmoSubstituicao(MemoriaFisica* memoriaFisica);
+void algoritmoSubstituicao_inicializar(char* algoritmoSubstituicao);
 
-        virtual EntradaTabela determinaPagina() = 0;
+EntradaTabela AlgoritmoSubstituicao_determinaPagina();
 
-    protected:
-        bool debug;
-        MemoriaFisica* memoriaFisica;
-};
+short debug;
+
+char* algoritmoSubstituicao;
 
 #endif //TP2_SO_SRC_HEADERS_ALGORITMO_SUBSTITUICAO_H

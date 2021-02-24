@@ -5,10 +5,7 @@
 
 #include "headers/mmu.h"
 #include "headers/algoritmo_substituicao.h"
-#include "headers/impl_algoritmos_substituicao/fifo.h"
-#include "headers/impl_algoritmos_substituicao/lru.h"
-#include "headers/impl_algoritmos_substituicao/novo.h"
-#include "headers/impl_algoritmos_substituicao/segunda_chance.h"
+#include "headers/memoria_fisica.h"
 
 
 int main(int argc, char** argv) {
@@ -53,30 +50,10 @@ int main(int argc, char** argv) {
         }
     }
 
-    MemoriaFisica memoria(tamanhoMemoria, tamanhoPagina, numeroPaginas, debug);
+    MemoriaFisica_inicializar(tamanhoMemoria, tamanhoPagina, numeroPaginas, debug);
 
-    AlgoritmoSubstituicao* algoritmoSub;
-
-    if(strcmp(algoritmoSubstituicao, "lru")) {
-        algoritmoSub = new LRU(&memoria);
-    }
+    algoritmoSubstituicao_inicializar(algoritmoSubstituicao);
     
-    if(strcmp(algoritmoSubstituicao, "2a")) {
-        algoritmoSub = new SegundaChance(&memoria);
-    }
-    
-    if(strcmp(algoritmoSubstituicao, "fifo")) {
-        algoritmoSub = new FIFO(&memoria);
-    }
-    
-    if(strcmp(algoritmoSubstituicao, "novo")) {
-        algoritmoSub = new Novo(&memoria);
-    }
-
-    unsigned contadorPaginasSujas = 0;
-
-    MMU gerenciadorMemoria(&memoria, &contadorPaginasSujas, algoritmoSub, debug);
-
     unsigned endereco;
     char rw;
 
@@ -101,29 +78,29 @@ int main(int argc, char** argv) {
     
     arquivo = fopen(arquivoEntrada, "r");
 
-    memoria.preencherStringTabelaPaginas(printsTabelas[0]);
+    MemoriaFisica_preencherStringTabelaPaginas(printsTabelas[0]);
 
     unsigned cont = 1;
 
     while(fscanf(arquivo, "%x %c", &endereco, &rw) != EOF) {
         //Tratar ação
-        bool pageFault = false;
+        short pageFault = 0;
         if(rw == 'R') { 
             contadorLeituras++;
-            pageFault = gerenciadorMemoria.lerEndereco((endereco >> bitsPagina));
+            pageFault = MMU_lerEndereco((endereco >> bitsPagina));
         } else {
             contadorEscritas++;
-            pageFault = gerenciadorMemoria.escreverEndereco((endereco >> bitsPagina));
+            pageFault = MMU_escreverEndereco((endereco >> bitsPagina));
         }
         if(pageFault) {
             contadorPageFaults++;
         }
         if(debug == 2) {
-            memoria.preencherStringTabelaPaginas(printsTabelas[cont++]);
+            MemoriaFisica_preencherStringTabelaPaginas(printsTabelas[cont++]);
         }
     }
 
-    memoria.preencherStringTabelaPaginas(printsTabelas[cont]);
+    MemoriaFisica_preencherStringTabelaPaginas(printsTabelas[cont]);
 
     clock_t fim = clock();
     double tempoGasto = ((double) (fim - inicio)) / CLOCKS_PER_SEC;

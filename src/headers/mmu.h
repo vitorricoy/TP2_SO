@@ -1,27 +1,12 @@
 #ifndef TP2_SO_SRC_HEADERS_MMU_H
 #define TP2_SO_SRC_HEADERS_MMU_H
 
-#include "entrada_tabela.h"
-#include "algoritmo_substituicao.h"
-#include "memoria_fisica.h"
+short MMU_lerEndereco(unsigned endereco);
 
+short MMU_escreverEndereco(unsigned endereco);
 
-class MMU {
-    public:
+void MMU_buscaPaginaParaMemoria(unsigned endereco, short escrita);
 
-        MMU(MemoriaFisica* memoriaFisica, unsigned* contadorPaginasSujas, AlgoritmoSubstituicao* algoritmo, bool debug);
-        
-        bool lerEndereco(unsigned endereco);
-        bool escreverEndereco(unsigned endereco);
-        
-
-    private:
-        
-        void buscaPaginaParaMemoria(unsigned endereco, bool escrita);
-        AlgoritmoSubstituicao* algoritmoSubstituicao;
-        MemoriaFisica* memoriaFisica;
-        unsigned* contadorPaginasSujas;
-        bool debug;
-};
+unsigned contadorPaginasSujas = 0;
 
 #endif //TP2_SO_SRC_HEADERS_MMU_H
