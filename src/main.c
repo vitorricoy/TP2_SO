@@ -118,7 +118,7 @@ int main(int argc, char** argv) {
     printf("Tecnica de reposicao: %s\n", algoritmoSubstituicao);
     printf("Paginas lidas: %u\n", contadorLeituras);
     printf("Paginas escritas: %u\n", contadorEscritas);
-    printf("Paginas sujas: %u\n", contadorPaginasSujas);
+    printf("Paginas sujas: %u\n", numeroPaginasSujas);
     printf("Tempo de Execucao: %lf\n", tempoGasto);
     printf("Tabelas:\n\n");
     printf("Tabela Inicio:\n");
