@@ -6,7 +6,7 @@
 
 void algoritmoSubstituicao_inicializar(char* algoritmoSubstituicao);
 
-EntradaTabela AlgoritmoSubstituicao_determinaPagina();
+unsigned AlgoritmoSubstituicao_determinaPagina();
 
 extern short debug;
 

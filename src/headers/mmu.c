@@ -28,10 +28,10 @@ short MMU_escreverEndereco(unsigned endereco) {
 void MMU_buscaPaginaParaMemoria(unsigned endereco, short escrita) {
     short sucesso = TabelaPaginas_colocaPaginaMemoria(endereco);
     if(!sucesso) {
-        EntradaTabela removida = AlgoritmoSubstituicao_determinaPagina();
-        if(removida.sujo) {
+        unsigned enderecoRemovido = AlgoritmoSubstituicao_determinaPagina();
+        if(TabelaPaginas_enderecoEstaSujo(enderecoRemovido)) {
             numeroPaginasSujas++;
         }
-        TabelaPaginas_colocaPaginaMemoriaCheia(endereco, removida.posicaoMemoria);
+        TabelaPaginas_substituiPaginasMemoria(endereco, enderecoRemovido);
     }
 }

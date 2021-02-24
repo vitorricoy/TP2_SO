@@ -4,8 +4,8 @@
 
 char* algoritmoSubstituicao;
 
-EntradaTabela AlgoritmoSubstituicao_determinaPagina() {
-    EntradaTabela x;
+unsigned AlgoritmoSubstituicao_determinaPagina() {
+    unsigned x;
     return x;
 }
 

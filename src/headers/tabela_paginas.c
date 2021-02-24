@@ -43,8 +43,9 @@ short TabelaPaginas_colocaPaginaMemoria(unsigned endereco) {
     return 0;
 }
 
-void TabelaPaginas_colocaPaginaMemoriaCheia(unsigned endereco, unsigned posicaoMemoria) {
-    paginasNaMemoria[posicaoMemoria] = endereco;
+void TabelaPaginas_substituiPaginasMemoria(unsigned endereco, unsigned enderecoRemovido) {
+    tabelaPaginas[endereco].valido = 0;
+    paginasNaMemoria[tabelaPaginas[endereco].posicaoMemoria] = endereco;
     tabelaPaginas[endereco].valido = 1;
     tabelaPaginas[endereco].sujo = 0;
     tabelaPaginas[endereco].tempoEntrada = contador;
