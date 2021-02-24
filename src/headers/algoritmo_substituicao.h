@@ -4,7 +4,7 @@
 #include "entrada_tabela.h"
 #include "memoria_fisica.h"
 
-class AlgoritmoSubstituicao {
+struct AlgoritmoSubstituicao {
     public:
         
         AlgoritmoSubstituicao(MemoriaFisica* memoriaFisica);

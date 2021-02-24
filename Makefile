@@ -1,33 +1,33 @@
 CC=g++
-CFLAGS=-std=c++11 -Wall -Wextra -Wno-unused-parameter
+CFLAGS=-Wall -Wextra -Wno-unused-parameter
 EXEC=tp2virtual
 
-$(EXEC): src/main.cpp mmu.o entrada_tabela.o memoria_fisica.o algoritmo_substituicao.o fifo.o lru.o novo.o segunda_chance.o
-	$(CC) $(CFLAGS) src/main.cpp mmu.o entrada_tabela.o memoria_fisica.o algoritmo_substituicao.o fifo.o lru.o novo.o segunda_chance.o -o $(EXEC)
+$(EXEC): src/main.c mmu.o entrada_tabela.o memoria_fisica.o algoritmo_substituicao.o fifo.o lru.o novo.o segunda_chance.o
+	$(CC) $(CFLAGS) src/main.c mmu.o entrada_tabela.o memoria_fisica.o algoritmo_substituicao.o fifo.o lru.o novo.o segunda_chance.o -o $(EXEC)
 
-mmu.o: src/headers/mmu.cpp
-	$(CC) $(CFLAGS) -c src/headers/mmu.cpp -o mmu.o
+mmu.o: src/headers/mmu.c
+	$(CC) $(CFLAGS) -c src/headers/mmu.c -o mmu.o
 
-entrada_tabela.o: src/headers/entrada_tabela.cpp
-	$(CC) $(CFLAGS) -c src/headers/entrada_tabela.cpp -o entrada_tabela.o
+entrada_tabela.o: src/headers/entrada_tabela.c
+	$(CC) $(CFLAGS) -c src/headers/entrada_tabela.c -o entrada_tabela.o
 
-memoria_fisica.o: src/headers/memoria_fisica.cpp
-	$(CC) $(CFLAGS) -c src/headers/memoria_fisica.cpp -o memoria_fisica.o
+memoria_fisica.o: src/headers/memoria_fisica.c
+	$(CC) $(CFLAGS) -c src/headers/memoria_fisica.c -o memoria_fisica.o
 
-algoritmo_substituicao.o: src/headers/algoritmo_substituicao.cpp
-	$(CC) $(CFLAGS) -c src/headers/algoritmo_substituicao.cpp -o algoritmo_substituicao.o
+algoritmo_substituicao.o: src/headers/algoritmo_substituicao.c
+	$(CC) $(CFLAGS) -c src/headers/algoritmo_substituicao.c -o algoritmo_substituicao.o
 
-fifo.o: src/headers/impl_algoritmos_substituicao/fifo.cpp
-	$(CC) $(CFLAGS) -c src/headers/impl_algoritmos_substituicao/fifo.cpp -o fifo.o
+fifo.o: src/headers/impl_algoritmos_substituicao/fifo.c
+	$(CC) $(CFLAGS) -c src/headers/impl_algoritmos_substituicao/fifo.c -o fifo.o
 
-lru.o: src/headers/impl_algoritmos_substituicao/lru.cpp
-	$(CC) $(CFLAGS) -c src/headers/impl_algoritmos_substituicao/lru.cpp -o lru.o
+lru.o: src/headers/impl_algoritmos_substituicao/lru.c
+	$(CC) $(CFLAGS) -c src/headers/impl_algoritmos_substituicao/lru.c -o lru.o
 
-novo.o: src/headers/impl_algoritmos_substituicao/novo.cpp
-	$(CC) $(CFLAGS) -c src/headers/impl_algoritmos_substituicao/novo.cpp -o novo.o
+novo.o: src/headers/impl_algoritmos_substituicao/novo.c
+	$(CC) $(CFLAGS) -c src/headers/impl_algoritmos_substituicao/novo.c -o novo.o
 
-segunda_chance.o: src/headers/impl_algoritmos_substituicao/segunda_chance.cpp
-	$(CC) $(CFLAGS) -c src/headers/impl_algoritmos_substituicao/segunda_chance.cpp -o segunda_chance.o
+segunda_chance.o: src/headers/impl_algoritmos_substituicao/segunda_chance.c
+	$(CC) $(CFLAGS) -c src/headers/impl_algoritmos_substituicao/segunda_chance.c -o segunda_chance.o
 
 clean:
 	rm -rf *.o
