@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include <string.h>
+#include <stdio.h>
 #include "memoria_fisica.h"
 #include "entrada_tabela.h"
 
@@ -41,5 +41,8 @@ void MemoriaFisica::setEnderecoSujo(unsigned endereco, bool sujo) {
 }
 
 void MemoriaFisica::preencherStringTabelaPaginas(char* string) {
-    strcat(string, "");
+    sprintf(string, "Pagina     Valido   Sujo   Tempo do Ultimo Acesso\n");
+    for(int I=0; I<this->numeroPaginas; I++) {
+        sprintf(string, "%#010x %d        %d      %d\n", I, this->tabelaPaginas[I].estaValido(), this->tabelaPaginas[I].estaSujo(), this->tabelaPaginas[I].getUltimoAcesso());
+    }
 }
