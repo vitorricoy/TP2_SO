@@ -5,7 +5,7 @@
 
 #include "headers/mmu.h"
 #include "headers/algoritmo_substituicao.h"
-#include "headers/memoria_fisica.h"
+#include "headers/tabela_paginas.h"
 
 
 short debug;
@@ -56,7 +56,7 @@ int main(int argc, char** argv) {
         }
     }
 
-    MemoriaFisica_inicializar(tamanhoMemoria, tamanhoPagina, numeroPaginas, debug);
+    TabelaPaginas_inicializar(tamanhoMemoria, tamanhoPagina, numeroPaginas, debug);
 
     algoritmoSubstituicao_inicializar(algoritmoSubstituicao);
     
@@ -84,7 +84,7 @@ int main(int argc, char** argv) {
     
     arquivo = fopen(arquivoEntrada, "r");
 
-    MemoriaFisica_preencherStringTabelaPaginas(printsTabelas[0]);
+    TabelaPaginas_preencherStringTabelaPaginas(printsTabelas[0]);
 
     unsigned cont = 1;
 
@@ -103,11 +103,11 @@ int main(int argc, char** argv) {
             contadorPageFaults++;
         }
         if(debug == 2) {
-            MemoriaFisica_preencherStringTabelaPaginas(printsTabelas[cont++]);
+            TabelaPaginas_preencherStringTabelaPaginas(printsTabelas[cont++]);
         }
     }
 
-    MemoriaFisica_preencherStringTabelaPaginas(printsTabelas[cont]);
+    TabelaPaginas_preencherStringTabelaPaginas(printsTabelas[cont]);
 
     clock_t fim = clock();
     double tempoGasto = ((double) (fim - inicio)) / CLOCKS_PER_SEC;

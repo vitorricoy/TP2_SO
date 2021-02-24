@@ -1,12 +1,12 @@
 #include <stdlib.h>
 #include "mmu.h"
 #include "entrada_tabela.h"
-#include "memoria_fisica.h"
+#include "tabela_paginas.h"
 #include "algoritmo_substituicao.h"
 
 short MMU_lerEndereco(unsigned endereco) {
-    if(MemoriaFisica_enderecoEstaValido(endereco)) {
-        MemoriaFisica_atualizarUltimoAcesso(endereco);
+    if(TabelaPaginas_enderecoEstaValido(endereco)) {
+        TabelaPaginas_atualizarUltimoAcesso(endereco);
         return 0;
     } else {
         MMU_buscaPaginaParaMemoria(endereco, 0);
@@ -15,9 +15,9 @@ short MMU_lerEndereco(unsigned endereco) {
 }
 
 short MMU_escreverEndereco(unsigned endereco) {
-    if(MemoriaFisica_enderecoEstaValido(endereco)) {
-        MemoriaFisica_atualizarUltimoAcesso(endereco);
-        MemoriaFisica_setEnderecoSujo(endereco, 1);
+    if(TabelaPaginas_enderecoEstaValido(endereco)) {
+        TabelaPaginas_atualizarUltimoAcesso(endereco);
+        TabelaPaginas_setEnderecoSujo(endereco, 1);
         return 0;
     } else {
         MMU_buscaPaginaParaMemoria(endereco, 1);
@@ -26,12 +26,12 @@ short MMU_escreverEndereco(unsigned endereco) {
 }
 
 void MMU_buscaPaginaParaMemoria(unsigned endereco, short escrita) {
-    short sucesso = MemoriaFisica_colocaPaginaMemoria(endereco);
+    short sucesso = TabelaPaginas_colocaPaginaMemoria(endereco);
     if(!sucesso) {
         EntradaTabela removida = AlgoritmoSubstituicao_determinaPagina();
         if(removida.sujo) {
             numeroPaginasSujas++;
         }
-        MemoriaFisica_colocaPaginaMemoriaCheia(endereco, removida.posicaoMemoria);
+        TabelaPaginas_colocaPaginaMemoriaCheia(endereco, removida.posicaoMemoria);
     }
 }

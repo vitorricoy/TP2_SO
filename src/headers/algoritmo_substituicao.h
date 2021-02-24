@@ -2,7 +2,7 @@
 #define TP2_SO_SRC_HEADERS_ALGORITMO_SUBSTITUICAO_H
 
 #include "entrada_tabela.h"
-#include "memoria_fisica.h"
+#include "tabela_paginas.h"
 
 void algoritmoSubstituicao_inicializar(char* algoritmoSubstituicao);
 

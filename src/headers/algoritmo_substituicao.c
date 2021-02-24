@@ -1,5 +1,5 @@
 #include "algoritmo_substituicao.h"
-#include "memoria_fisica.h"
+#include "tabela_paginas.h"
 #include "entrada_tabela.h"
 
 char* algoritmoSubstituicao;

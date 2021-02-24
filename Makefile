@@ -2,8 +2,8 @@ CC=gcc
 CFLAGS=-Wall -Wextra -Wno-unused-parameter
 EXEC=tp2virtual
 
-$(EXEC): src/main.c mmu.o entrada_tabela.o memoria_fisica.o algoritmo_substituicao.o fifo.o lru.o novo.o segunda_chance.o
-	$(CC) $(CFLAGS) src/main.c mmu.o entrada_tabela.o memoria_fisica.o algoritmo_substituicao.o fifo.o lru.o novo.o segunda_chance.o -o $(EXEC)
+$(EXEC): src/main.c mmu.o entrada_tabela.o tabela_paginas.o algoritmo_substituicao.o fifo.o lru.o novo.o segunda_chance.o
+	$(CC) $(CFLAGS) src/main.c mmu.o entrada_tabela.o tabela_paginas.o algoritmo_substituicao.o fifo.o lru.o novo.o segunda_chance.o -o $(EXEC)
 
 mmu.o: src/headers/mmu.c
 	$(CC) $(CFLAGS) -c src/headers/mmu.c -o mmu.o
@@ -11,8 +11,8 @@ mmu.o: src/headers/mmu.c
 entrada_tabela.o: src/headers/entrada_tabela.c
 	$(CC) $(CFLAGS) -c src/headers/entrada_tabela.c -o entrada_tabela.o
 
-memoria_fisica.o: src/headers/memoria_fisica.c
-	$(CC) $(CFLAGS) -c src/headers/memoria_fisica.c -o memoria_fisica.o
+tabela_paginas.o: src/headers/tabela_paginas.c
+	$(CC) $(CFLAGS) -c src/headers/tabela_paginas.c -o tabela_paginas.o
 
 algoritmo_substituicao.o: src/headers/algoritmo_substituicao.c
 	$(CC) $(CFLAGS) -c src/headers/algoritmo_substituicao.c -o algoritmo_substituicao.o
