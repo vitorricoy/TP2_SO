@@ -9,6 +9,8 @@
 
 
 short debug;
+unsigned contador;
+unsigned numeroPaginasSujas;
 
 int main(int argc, char** argv) {
     if(argc != 5 && argc != 6) {
@@ -20,6 +22,8 @@ int main(int argc, char** argv) {
     unsigned tamanhoPagina = strtoul(argv[3], NULL, 10);
     unsigned tamanhoMemoria = strtoul(argv[4], NULL, 10);
     debug = 0;
+    contador = 0;
+    numeroPaginasSujas = 0;
     if(argc == 5) {
         debug = strtoul(argv[5], NULL, 10);
     }
@@ -74,8 +78,8 @@ int main(int argc, char** argv) {
     }
     printsTabelas = (char**) malloc(numeroPrintsTabelas*sizeof(char*));
     for(unsigned I=0; I<numeroPrintsTabelas; I++) {
-        // Cada linha da tabela tem 50 caracteres e tem o \0 no fim
-        printsTabelas[I] = (char*) malloc(50*(numeroLinhas+1)*sizeof(char) + sizeof(char));
+        // Cada linha da tabela tem 77 caracteres e tem o \0 no fim
+        printsTabelas[I] = (char*) malloc(77*(numeroLinhas+1)*sizeof(char) + sizeof(char));
     }
     
     arquivo = fopen(arquivoEntrada, "r");
@@ -87,6 +91,7 @@ int main(int argc, char** argv) {
     while(fscanf(arquivo, "%x %c", &endereco, &rw) != EOF) {
         //Tratar ação
         short pageFault = 0;
+        contador++;
         if(rw == 'R') { 
             contadorLeituras++;
             pageFault = MMU_lerEndereco((endereco >> bitsPagina));
