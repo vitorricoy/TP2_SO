@@ -65,6 +65,6 @@ void TabelaPaginas_atualizarUltimoAcesso(unsigned endereco) {
 void TabelaPaginas_preencherStringTabelaPaginas(char* string) {
     sprintf(string, "Pagina     Valido   Sujo   Tempo Entrada  Segunda Chance  Tempo do Ultimo Acesso\n");
     for(unsigned I=0; I<numeroPaginas; I++) {
-        sprintf(string+81*(I+1), "%#010x %d        %d      %-14d  %d               %d\n", I, tabelaPaginas[I].valido, tabelaPaginas[I].sujo, tabelaPaginas[I].tempoEntrada, tabelaPaginas[I].segundaChance, tabelaPaginas[I].ultimoAcesso);
+        sprintf(string+82*(I+1), "%#010x %d        %d      %-14d  %d               %d\n", I, tabelaPaginas[I].valido, tabelaPaginas[I].sujo, tabelaPaginas[I].tempoEntrada, tabelaPaginas[I].segundaChance, tabelaPaginas[I].ultimoAcesso);
     }
 }
