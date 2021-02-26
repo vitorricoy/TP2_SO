@@ -2,8 +2,11 @@
 #include "novo.h"
 #include "../tabela_paginas.h"
 
+extern unsigned paginasOcupadas;
+extern unsigned* paginasNaMemoria;
+
 unsigned novo() {
-    int indice = rand() % paginasOcupadas;
-    int endereco = paginasNaMemoria[indice];
+    unsigned indice = rand() % paginasOcupadas;
+    unsigned endereco = paginasNaMemoria[indice];
     return endereco;
 }

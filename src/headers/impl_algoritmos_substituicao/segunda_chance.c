@@ -1,9 +1,14 @@
+#include <stdlib.h>
 #include "segunda_chance.h"
 #include "../tabela_paginas.h"
 
+extern unsigned paginasOcupadas;
+extern EntradaTabela* tabelaPaginas;
+extern unsigned* paginasNaMemoria;
+
 typedef struct AuxPagina {
     unsigned tempo;
-    unsigned referencia;
+    short referencia;
     unsigned endereco;
 }AuxPagina;
 

@@ -1,5 +1,10 @@
+#include <stdlib.h>
 #include "lru.h"
 #include "../tabela_paginas.h"
+
+extern unsigned paginasOcupadas;
+extern EntradaTabela* tabelaPaginas;
+extern unsigned* paginasNaMemoria;
 
 unsigned LRU() {
     unsigned ultimo, tempoUltimo;

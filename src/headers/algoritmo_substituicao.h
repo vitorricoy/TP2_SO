@@ -8,8 +8,4 @@ void algoritmoSubstituicao_inicializar(char* algoritmoSubstituicao);
 
 unsigned AlgoritmoSubstituicao_determinaPagina();
 
-extern short debug;
-
-extern char* algoritmoSubstituicao;
-
 #endif //TP2_SO_SRC_HEADERS_ALGORITMO_SUBSTITUICAO_H

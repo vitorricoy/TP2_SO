@@ -9,8 +9,6 @@
 
 
 short debug;
-unsigned contador;
-unsigned numeroPaginasSujas;
 
 int main(int argc, char** argv) {
     if(argc != 5 && argc != 6) {
@@ -19,8 +17,8 @@ int main(int argc, char** argv) {
     }
     char* algoritmoSubstituicao = argv[1];
     char* arquivoEntrada = argv[2];
-    unsigned tamanhoPagina = strtoul(argv[3], NULL, 10);
-    unsigned tamanhoMemoria = strtoul(argv[4], NULL, 10);
+    unsigned tamanhoPagina = strtoul(argv[3], NULL, 10)*1000;
+    unsigned tamanhoMemoria = strtoul(argv[4], NULL, 10)*1000;
     debug = 0;
     contador = 0;
     numeroPaginasSujas = 0;
@@ -29,7 +27,7 @@ int main(int argc, char** argv) {
     }
 
     unsigned bitsPagina = 0, temp = tamanhoPagina;
-    while (temp > 1) {
+    while (temp >= 1) {
         temp = temp >> 1;
         bitsPagina++;
     }
@@ -44,9 +42,8 @@ int main(int argc, char** argv) {
         }
     }
 
-    fclose(arquivo);
-
-    unsigned numeroPaginas = (1 << (32-bitsPagina));
+    unsigned long long numeroPaginasCalculo = (1LL << (32LL - bitsPagina));
+    unsigned numeroPaginas = numeroPaginasCalculo;
 
     if(debug == 2) { // Imprime a tabela por cada iteração
         long long custoIteracoes = numeroPaginas * numeroLinhas;
@@ -56,7 +53,7 @@ int main(int argc, char** argv) {
         }
     }
 
-    TabelaPaginas_inicializar(tamanhoMemoria, tamanhoPagina, numeroPaginas, debug);
+    TabelaPaginas_inicializar(tamanhoMemoria, tamanhoPagina, numeroPaginas);
 
     algoritmoSubstituicao_inicializar(algoritmoSubstituicao);
     
@@ -77,18 +74,23 @@ int main(int argc, char** argv) {
         numeroPrintsTabelas = numeroLinhas+1;
     }
     printsTabelas = (char**) malloc(numeroPrintsTabelas*sizeof(char*));
+    if(printsTabelas == NULL) {
+        printf("Erro\n");
+    }
     for(unsigned I=0; I<numeroPrintsTabelas; I++) {
-        // Cada linha da tabela tem 81 caracteres e tem o \0 no fim
-        printsTabelas[I] = (char*) malloc(82*(numeroLinhas+1)*sizeof(char) + sizeof(char));
+        // Cada linha da tabela tem ate 90 caracteres e tem o \0 no fim
+        //500*(numeroLinhas+1)*sizeof(char) + sizeof(char)
+        printsTabelas[I] = (char*) malloc(100000000);
     }
     
-    arquivo = fopen(arquivoEntrada, "r");
+    rewind(arquivo);
 
     TabelaPaginas_preencherStringTabelaPaginas(printsTabelas[0]);
 
     unsigned cont = 1;
 
-    while(fscanf(arquivo, "%x %c", &endereco, &rw) != EOF) {
+    int valScan = fscanf(arquivo, "%x %c\n", &endereco, &rw);
+    while(valScan && valScan != EOF) {
         //Tratar ação
         short pageFault = 0;
         contador++;
@@ -105,16 +107,18 @@ int main(int argc, char** argv) {
         if(debug == 2) {
             TabelaPaginas_preencherStringTabelaPaginas(printsTabelas[cont++]);
         }
+        valScan = fscanf(arquivo, "%x %c\n", &endereco, &rw);
     }
 
+    fclose(arquivo);
     TabelaPaginas_preencherStringTabelaPaginas(printsTabelas[cont]);
 
     clock_t fim = clock();
     double tempoGasto = ((double) (fim - inicio)) / CLOCKS_PER_SEC;
 
     printf("Arquivo de Entrada: %s\n", arquivoEntrada);
-    printf("Tamanho da Memoria: %u KB\n", tamanhoMemoria);
-    printf("Tamanho das paginas: %u KB\n", tamanhoPagina);
+    printf("Tamanho da Memoria: %u KB\n", tamanhoMemoria/1000);
+    printf("Tamanho das paginas: %u KB\n", tamanhoPagina/1000);
     printf("Tecnica de reposicao: %s\n", algoritmoSubstituicao);
     printf("Paginas lidas: %u\n", contadorLeituras);
     printf("Paginas escritas: %u\n", contadorEscritas);
@@ -136,5 +140,7 @@ int main(int argc, char** argv) {
         free(printsTabelas[I]);
     }
     free(printsTabelas);
+    printf("OI");
+    TabelaPaginas_destruir();
     return 0;
 }

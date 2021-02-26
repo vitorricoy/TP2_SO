@@ -5,7 +5,7 @@ short MMU_lerEndereco(unsigned endereco);
 
 short MMU_escreverEndereco(unsigned endereco);
 
-void MMU_buscaPaginaParaMemoria(unsigned endereco, short escrita);
+void MMU_buscaPaginaParaMemoria(unsigned endereco);
 
 extern unsigned numeroPaginasSujas;
 

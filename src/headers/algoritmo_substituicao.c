@@ -1,20 +1,23 @@
+#include <string.h>
 #include "algoritmo_substituicao.h"
+#include "impl_algoritmos_substituicao/fifo.h"
+#include "impl_algoritmos_substituicao/lru.h"
+#include "impl_algoritmos_substituicao/novo.h"
+#include "impl_algoritmos_substituicao/segunda_chance.h"
 
 char* algoritmoSubstituicao;
 
 unsigned AlgoritmoSubstituicao_determinaPagina() {
-    if(strcmp(algoritmoSubstituicao, "fifo")) {
+    if(!strcmp(algoritmoSubstituicao, "fifo")) {
         return FIFO();
     }
-    if(strcmp(algoritmoSubstituicao, "lru")) {
+    if(!strcmp(algoritmoSubstituicao, "lru")) {
         return LRU();
     }
-    if(strcmp(algoritmoSubstituicao, "2c")) {
+    if(!strcmp(algoritmoSubstituicao, "2c")) {
         return segundaChance();
     }
-    if(strcmp(algoritmoSubstituicao, "novo")){
-        return Novo();
-    }
+    return novo();
 }
 
 void algoritmoSubstituicao_inicializar(char* algSub) {

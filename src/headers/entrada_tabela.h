@@ -6,7 +6,7 @@ typedef struct EntradaTabela {
         short valido;
         unsigned ultimoAcesso;
         unsigned tempoEntrada;
-        unsigned segundaChance;
+        short segundaChance;
         unsigned posicaoMemoria;
 } EntradaTabela;
 
