@@ -14,7 +14,7 @@ unsigned AlgoritmoSubstituicao_determinaPagina() {
     if(!strcmp(algoritmoSubstituicao, "lru")) {
         return LRU();
     }
-    if(!strcmp(algoritmoSubstituicao, "2c")) {
+    if(!strcmp(algoritmoSubstituicao, "2a")) {
         return segundaChance();
     }
     return novo();

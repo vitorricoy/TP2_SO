@@ -21,7 +21,7 @@ void TabelaPaginas_atualizarUltimoAcesso(unsigned endereco);
 
 void TabelaPaginas_destruir();
 
-extern unsigned tamanhoMemoria;
+extern unsigned numeroPaginasMemoria;
 extern unsigned paginasOcupadas;
 extern unsigned numeroPaginas;
 extern EntradaTabela* tabelaPaginas;

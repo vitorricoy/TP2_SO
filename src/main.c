@@ -22,7 +22,7 @@ int main(int argc, char** argv) {
     debug = 0;
     contador = 0;
     numeroPaginasSujas = 0;
-    if(argc == 5) {
+    if(argc == 6) {
         debug = strtoul(argv[5], NULL, 10);
     }
 
@@ -32,26 +32,8 @@ int main(int argc, char** argv) {
         bitsPagina++;
     }
 
-    FILE* arquivo = fopen(arquivoEntrada, "r");
-
-    unsigned numeroLinhas = 0;
-
-    for(char c = getc(arquivo); c != EOF; c = getc(arquivo)) {
-        if(c == '\n') {
-            numeroLinhas++;
-        }
-    }
-
     unsigned long long numeroPaginasCalculo = (1LL << (32LL - bitsPagina));
     unsigned numeroPaginas = numeroPaginasCalculo;
-
-    if(debug == 2) { // Imprime a tabela por cada iteração
-        long long custoIteracoes = numeroPaginas * numeroLinhas;
-        if(custoIteracoes > 1e8) {
-            printf("Arquivo de entrada ou numero de paginas muito grandes para executarem o debug detalhado em tempo habil\n");
-            return 0;
-        }
-    }
 
     TabelaPaginas_inicializar(tamanhoMemoria, tamanhoPagina, numeroPaginas);
 
@@ -69,25 +51,23 @@ int main(int argc, char** argv) {
     clock_t inicio = clock();
 
     char** printsTabelas;
-    unsigned numeroPrintsTabelas = 2;
-    if(debug == 2) {
-        numeroPrintsTabelas = numeroLinhas+1;
-    }
-    printsTabelas = (char**) malloc(numeroPrintsTabelas*sizeof(char*));
+    printsTabelas = (char**) malloc(2*sizeof(char*));
     if(printsTabelas == NULL) {
         printf("Erro\n");
-    }
-    for(unsigned I=0; I<numeroPrintsTabelas; I++) {
-        // Cada linha da tabela tem ate 90 caracteres e tem o \0 no fim
-        //500*(numeroLinhas+1)*sizeof(char) + sizeof(char)
-        printsTabelas[I] = (char*) malloc(100000000);
+        return -1;
     }
     
-    rewind(arquivo);
+    for(unsigned I=0; I<2; I++) {
+        printsTabelas[I] = (char*) malloc(91*(numeroPaginas+1)*sizeof(char) + sizeof(char));
+        if(printsTabelas[I] == NULL) {
+            printf("Erro\n");
+            exit(-1);
+        }
+    }
+    
+    FILE* arquivo = fopen(arquivoEntrada, "r");
 
     TabelaPaginas_preencherStringTabelaPaginas(printsTabelas[0]);
-
-    unsigned cont = 1;
 
     int valScan = fscanf(arquivo, "%x %c\n", &endereco, &rw);
     while(valScan && valScan != EOF) {
@@ -104,14 +84,11 @@ int main(int argc, char** argv) {
         if(pageFault) {
             contadorPageFaults++;
         }
-        if(debug == 2) {
-            TabelaPaginas_preencherStringTabelaPaginas(printsTabelas[cont++]);
-        }
         valScan = fscanf(arquivo, "%x %c\n", &endereco, &rw);
     }
 
     fclose(arquivo);
-    TabelaPaginas_preencherStringTabelaPaginas(printsTabelas[cont]);
+    TabelaPaginas_preencherStringTabelaPaginas(printsTabelas[1]);
 
     clock_t fim = clock();
     double tempoGasto = ((double) (fim - inicio)) / CLOCKS_PER_SEC;
@@ -127,20 +104,12 @@ int main(int argc, char** argv) {
     printf("Tabelas:\n\n");
     printf("Tabela Inicio:\n");
     printf("%s\n", printsTabelas[0]);
-    if(debug == 2) {
-        for(unsigned I=1; I<numeroLinhas; I++) {
-            printf("Tabela após passo %d:\n", I);
-            printf("%s\n", printsTabelas[I]);
-        }
-    }
     printf("Tabela Fim:\n");
-    printf("%s", printsTabelas[cont]);
-
-    for(unsigned I=0; I<numeroPrintsTabelas; I++) {
+    printf("%s", printsTabelas[1]);
+    for(unsigned I=0; I<2; I++) {
         free(printsTabelas[I]);
     }
     free(printsTabelas);
-    printf("OI");
     TabelaPaginas_destruir();
     return 0;
 }

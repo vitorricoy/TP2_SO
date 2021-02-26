@@ -3,17 +3,18 @@
 #include "tabela_paginas.h"
 #include "entrada_tabela.h"
 
-unsigned tamanhoMemoria;
+unsigned numeroPaginasMemoria;
 unsigned paginasOcupadas;
 unsigned numeroPaginas;
 EntradaTabela* tabelaPaginas;
 unsigned* paginasNaMemoria;
 unsigned contador;
+unsigned numeroPaginasMemoria;
 
 void TabelaPaginas_inicializar(unsigned tamMem, unsigned tamPag, unsigned numPag){
-    tamanhoMemoria = tamMem;
-    tabelaPaginas = (EntradaTabela*) calloc(numPag, sizeof(EntradaTabela));
-    paginasNaMemoria = (unsigned*) calloc((tamMem/tamPag), sizeof(unsigned));
+    numeroPaginasMemoria = (tamMem/tamPag);
+    tabelaPaginas = (EntradaTabela*) malloc(numPag*sizeof(EntradaTabela));
+    paginasNaMemoria = (unsigned*) malloc(numeroPaginasMemoria*sizeof(unsigned));
     numeroPaginas = numPag;
     paginasOcupadas = 0;
 }
@@ -36,7 +37,7 @@ void TabelaPaginas_setEnderecoValido(unsigned endereco, short valido) {
 }
 
 short TabelaPaginas_colocaPaginaMemoria(unsigned endereco) {
-    if(paginasOcupadas < numeroPaginas) {
+    if(paginasOcupadas < numeroPaginasMemoria) {
         paginasNaMemoria[paginasOcupadas] = endereco;
         tabelaPaginas[endereco].posicaoMemoria = paginasOcupadas;
         paginasOcupadas++;
@@ -70,10 +71,12 @@ void TabelaPaginas_atualizarUltimoAcesso(unsigned endereco) {
 }
 
 void TabelaPaginas_preencherStringTabelaPaginas(char* string) {
-    printf(string , "Pagina     Valido   Sujo   Tempo Entrada  Segunda Chance  Tempo do Ultimo Acesso\n");
-    string  += sprintf(string , "Pagina     Valido   Sujo   Tempo Entrada  Segunda Chance  Tempo do Ultimo Acesso\n");
+    char* temp = string;
+    int v = 0;
+    v = sprintf(temp , "Pagina     Valido   Sujo   Tempo Entrada  Segunda Chance  Tempo do Ultimo Acesso\n");
+    temp+=v;
     for(unsigned I=0; I<numeroPaginas; I++) {
-        string += sprintf(string, "0x%08x %hd        %hd      %-14u  %hd               %u\n", I, tabelaPaginas[I].valido, tabelaPaginas[I].sujo, tabelaPaginas[I].tempoEntrada, tabelaPaginas[I].segundaChance, tabelaPaginas[I].ultimoAcesso);
-        printf(string, "0x%08x %hd        %hd      %-14u  %hd               %u\n", I, tabelaPaginas[I].valido, tabelaPaginas[I].sujo, tabelaPaginas[I].tempoEntrada, tabelaPaginas[I].segundaChance, tabelaPaginas[I].ultimoAcesso);
+        v = snprintf(temp, 91*sizeof(char), "0x%08x %hd        %hd      %-13u  %hd               %-10u\n", I, tabelaPaginas[I].valido, tabelaPaginas[I].sujo, tabelaPaginas[I].tempoEntrada, tabelaPaginas[I].segundaChance, tabelaPaginas[I].ultimoAcesso);
+        temp+=v;
     }
 }
