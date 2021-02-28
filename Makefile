@@ -2,14 +2,11 @@ CC=gcc
 CFLAGS=-g -Wall -Wextra -Wno-unused-parameter
 EXEC=tp2virtual
 
-$(EXEC): src/main.c entrada_tabela.o tabela_paginas.o mmu.o fifo.o lru.o novo.o segunda_chance.o algoritmo_substituicao.o
-	$(CC) $(CFLAGS) src/main.c entrada_tabela.o tabela_paginas.o mmu.o fifo.o lru.o novo.o segunda_chance.o algoritmo_substituicao.o -o $(EXEC)
+$(EXEC): src/main.c tabela_paginas.o mmu.o fifo.o lru.o novo.o segunda_chance.o algoritmo_substituicao.o
+	$(CC) $(CFLAGS) src/main.c tabela_paginas.o mmu.o fifo.o lru.o novo.o segunda_chance.o algoritmo_substituicao.o -o $(EXEC)
 
 mmu.o: src/headers/mmu.c
 	$(CC) $(CFLAGS) -c src/headers/mmu.c -o mmu.o
-
-entrada_tabela.o: src/headers/entrada_tabela.c
-	$(CC) $(CFLAGS) -c src/headers/entrada_tabela.c -o entrada_tabela.o
 
 tabela_paginas.o: src/headers/tabela_paginas.c
 	$(CC) $(CFLAGS) -c src/headers/tabela_paginas.c -o tabela_paginas.o

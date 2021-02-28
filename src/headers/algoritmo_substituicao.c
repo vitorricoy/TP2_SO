@@ -7,7 +7,10 @@
 
 char* algoritmoSubstituicao;
 
+// Inicializa a variável que guarda qual o algoritmo de substituição escolhido
 unsigned AlgoritmoSubstituicao_determinaPagina() {
+    
+    // Verifica qual foi o algoritmo escolhido e chama a função correspondente
     if(!strcmp(algoritmoSubstituicao, "fifo")) {
         return FIFO();
     }
@@ -20,6 +23,7 @@ unsigned AlgoritmoSubstituicao_determinaPagina() {
     return novo();
 }
 
+// Determina a página que deve ser removida de acordo com o algoritmo escolhido
 void algoritmoSubstituicao_inicializar(char* algSub) {
     algoritmoSubstituicao = algSub;
 }
