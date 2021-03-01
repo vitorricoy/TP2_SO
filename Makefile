@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-g -Wall -Wextra -Wno-unused-parameter
+CFLAGS=-Wall -Wextra -Wno-unused-parameter
 EXEC=tp2virtual
 
 $(EXEC): src/main.c tabela_paginas.o mmu.o fifo.o lru.o novo.o segunda_chance.o algoritmo_substituicao.o
