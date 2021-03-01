@@ -96,7 +96,7 @@ void TabelaPaginas_substituiPaginasMemoria(unsigned endereco, unsigned enderecoR
 
 // Atualiza o momento do último acesso ao endereço dado por 'endereco'
 // e reinicia a flag de segunda chance
-void TabelaPaginas_atualizarUltimoAcesso(unsigned endereco) {
+void TabelaPaginas_atualizarValoresPaginaAcessada(unsigned endereco) {
     tabelaPaginas[endereco].ultimoAcesso = contadorOperacoes;
     tabelaPaginas[endereco].segundaChance = 1;
 }

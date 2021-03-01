@@ -28,7 +28,8 @@ short TabelaPaginas_colocaPaginaMemoria(unsigned endereco);
 void TabelaPaginas_substituiPaginasMemoria(unsigned endereco, unsigned enderecoRemovido);
 
 // Atualiza o momento do último acesso ao endereço dado por 'endereco'
-void TabelaPaginas_atualizarUltimoAcesso(unsigned endereco);
+// e reinicia a flag de segunda chance
+void TabelaPaginas_atualizarValoresPaginaAcessada(unsigned endereco);
 
 // Preenche a string dada com a representação em string da tabela de páginas
 void TabelaPaginas_preencherStringTabelaPaginas(char* string);

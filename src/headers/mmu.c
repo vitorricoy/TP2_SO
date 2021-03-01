@@ -15,8 +15,8 @@ short MMU_lerEndereco(unsigned endereco) {
     // Verifica se a página já está na memória
     if(TabelaPaginas_enderecoEstaValido(endereco)) {
 
-        // Caso página esteja na memória, apenas atualiza o momento do último acesso
-        TabelaPaginas_atualizarUltimoAcesso(endereco);
+        // Caso página esteja na memória, atualiza as flags devido ao acesso
+        TabelaPaginas_atualizarValoresPaginaAcessada(endereco);
 
         if(debug) { // Imprime a mensagem do modo debug
             printf("Pagina 0x%08x acessada\n", endereco);
@@ -41,9 +41,9 @@ short MMU_escreverEndereco(unsigned endereco) {
     // Verifica se a página já está na memória
     if(TabelaPaginas_enderecoEstaValido(endereco)) {
 
-        // Caso página esteja na memória, atualiza o momento do último 
-        // acesso e marca que a página está suja
-        TabelaPaginas_atualizarUltimoAcesso(endereco);
+        // Caso página esteja na memória, atualiza as flags devido ao acesso 
+        // e marca que a página está suja
+        TabelaPaginas_atualizarValoresPaginaAcessada(endereco);
         TabelaPaginas_setEnderecoSujo(endereco, 1);
 
         if(debug) { // Imprime a mensagem do modo debug
