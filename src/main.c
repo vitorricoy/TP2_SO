@@ -40,6 +40,9 @@ int main(int argc, char** argv) {
         bitsPagina++;
     }
 
+    // Define a seed para o rand
+    srand(time(NULL));
+
     // Calcula o número máximo de páginas do tamanho fornecido representáveis com 32 bits
     unsigned long long numeroPaginasCalculo = (1LL << (32LL - bitsPagina));
     unsigned numeroPaginas = numeroPaginasCalculo;
@@ -136,9 +139,9 @@ int main(int argc, char** argv) {
     printf("Tempo de Execucao: %lf\n", tempoGasto);
     printf("Tabelas:\n\n");
     printf("Tabela Inicio:\n");
-    printf("%s\n", printsTabelas[0]);
+    //printf("%s\n", printsTabelas[0]);
     printf("Tabela Fim:\n");
-    printf("%s", printsTabelas[1]);
+    //printf("%s", printsTabelas[1]);
 
     // Libera as memórias alocadas dinamicamente
     for(unsigned I=0; I<2; I++) {
