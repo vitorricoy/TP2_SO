@@ -7,7 +7,7 @@ unsigned numeroPaginasMemoria; // Número de páginas que podem ser salvas na me
 unsigned paginasOcupadas = 0; // Número de páginas ocupadas na memória
 unsigned numeroPaginas; // Número total de páginas do programa
 EntradaTabela* tabelaPaginas; // Tabela de páginas com as informações lógicas de cada página
-unsigned* paginasNaMemoria; // Tabela de páginas reversa com o endereço de cada página salva na memória
+unsigned* paginasNaMemoria; // Tabela de páginas reversa com o identificador de cada página salva na memória
 unsigned contadorOperacoes  = 0; // Contador das operações do programa utilizado como contador do tempo do programa
 
 // Inicializa as variáveis relacionadas à tabela de páginas

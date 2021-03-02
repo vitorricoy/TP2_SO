@@ -38,7 +38,7 @@ extern unsigned numeroPaginasMemoria; // Número de páginas que podem ser salva
 extern unsigned paginasOcupadas; // Número de páginas ocupadas na memória
 extern unsigned numeroPaginas; // Número total de páginas do programa
 extern EntradaTabela* tabelaPaginas; // Tabela de páginas com as informações lógicas de cada página
-extern unsigned* paginasNaMemoria; // Tabela de páginas reversa com o endereço de cada página salva na memória
+extern unsigned* paginasNaMemoria; // Tabela de páginas reversa com o identificador de cada página salva na memória
 extern unsigned contadorOperacoes; // Contador das operações do programa utilizado como contador do tempo do programa
 
 #endif //TP2_SO_SRC_HEADERS_MEMORIA_FISICA_H
