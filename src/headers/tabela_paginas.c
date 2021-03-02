@@ -19,8 +19,23 @@ void TabelaPaginas_inicializar(unsigned tamMem, unsigned tamPag, unsigned numPag
     // Aloca a tabela de páginas
     tabelaPaginas = (EntradaTabela*) malloc(numPag*sizeof(EntradaTabela));
 
+    // Inicializa a tabela de páginas alocada
+    for(unsigned I=0; I<numPag; I++) {
+        tabelaPaginas[I].posicaoMemoria = 0;
+        tabelaPaginas[I].segundaChance = 0;
+        tabelaPaginas[I].sujo = 0;
+        tabelaPaginas[I].tempoEntrada = 0;
+        tabelaPaginas[I].ultimoAcesso = 0;
+        tabelaPaginas[I].valido = 0;
+    }
+
     // Aloca a tabela de páginas reversa que contém o endereço das páginas salvas em cada posição da memória
     paginasNaMemoria = (unsigned*) malloc(numeroPaginasMemoria*sizeof(unsigned));
+
+    // Inicializa a tabela de páginas reversa
+    for(unsigned I=0; I<numeroPaginasMemoria; I++) {
+        paginasNaMemoria[I] = 0;
+    }
 
     // Salva o número de páginas
     numeroPaginas = numPag;

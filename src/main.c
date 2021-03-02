@@ -66,11 +66,17 @@ int main(int argc, char** argv) {
     for(unsigned I=0; I<2; I++) {
 
         printsTabelas[I] = (char*) malloc(91*(numeroPaginas+1)*sizeof(char) + sizeof(char));
-
+        
         if(printsTabelas[I] == NULL) {
             printf("Erro na alocacao da posicao %u de printsTabelas\n", I);
             return -1;
         }
+
+        // Inicializa o vetor criado
+        for(unsigned J=0; J<91*(numeroPaginas+1)+1; J++) {
+            printsTabelas[I][J] = '\0';
+        }
+
     }
     
     // Preenche a string que representa a tabela de páginas inicial (vazia)

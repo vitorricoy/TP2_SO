@@ -23,20 +23,26 @@ int comparacao (const void* p1, const void* p2) {
 // Dado um k aleatório, remove a k-esima pagina, numa ordenação crescente das páginas por tempo de entrada.
 unsigned novo() {
 
-    AuxPagina* aux_pagina = (AuxPagina*) malloc(paginasOcupadas * sizeof(AuxPagina));
+    // Aloca o vetor das páginas na memória com as informações necessárias
+    AuxPagina* auxPagina = (AuxPagina*) malloc(paginasOcupadas * sizeof(AuxPagina));
 
     // Preenche o vetor alocado
     for(unsigned I=0; I<paginasOcupadas; I++) {
-        aux_pagina[I].tempo = tabelaPaginas[paginasNaMemoria[I]].tempoEntrada;
-        aux_pagina[I].identificador = paginasNaMemoria[I];
+        auxPagina[I].tempo = tabelaPaginas[paginasNaMemoria[I]].tempoEntrada;
+        auxPagina[I].identificador = paginasNaMemoria[I];
     }
 
     // Ordena esse vetor pelo tempo de entrada
-    qsort(aux_pagina, paginasOcupadas, sizeof(AuxPagina), comparacao);
+    qsort(auxPagina, paginasOcupadas, sizeof(AuxPagina), comparacao);
 
     // Sorteia um número k aleatório 
     unsigned k = rand() % paginasOcupadas;
     
     // Retorna o k-esimo elemento do vetor ordenado por tempo de entrada
-    return aux_pagina[k].identificador;
+    unsigned retorno = auxPagina[k].identificador;
+
+    // Desaloca a memória alocada
+    free(auxPagina);
+
+    return retorno;
 }
