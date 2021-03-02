@@ -129,6 +129,9 @@ int main(int argc, char** argv) {
 
     }
 
+    // Desaloca a memória da última linha lida
+    free(linha);
+
     // Registra o tempo no fim da execução do programa
     clock_t fim = clock();
 
