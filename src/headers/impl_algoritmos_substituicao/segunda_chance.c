@@ -11,7 +11,7 @@ extern unsigned* paginasNaMemoria;
 typedef struct AuxPagina {
     unsigned tempo;
     short referencia;
-    unsigned endereco;
+    unsigned identificador;
 } AuxPagina;
 
 // Comparador utilizado para a ordenação
@@ -30,7 +30,7 @@ unsigned segundaChance() {
     for(unsigned I=0; I<paginasOcupadas; I++) {
         pagina[I].tempo = tabelaPaginas[paginasNaMemoria[I]].tempoEntrada;
         pagina[I].referencia = tabelaPaginas[paginasNaMemoria[I]].segundaChance;
-        pagina[I].endereco = paginasNaMemoria[I];
+        pagina[I].identificador = paginasNaMemoria[I];
     }
     
     // Ordena esse vetor pelo tempo de entrada
@@ -41,14 +41,14 @@ unsigned segundaChance() {
     while(pagina[posicao].referencia) {
 
         // Marca a flag como usada em ambos arrays
-        tabelaPaginas[pagina[posicao].endereco].segundaChance = 0;
+        tabelaPaginas[pagina[posicao].identificador].segundaChance = 0;
         pagina[posicao].referencia = 0;
 
         // Vai para a próxima posição de forma circular
         posicao = (posicao + 1) % paginasOcupadas;
     }
 
-    // Retorna o endereço da primeira página com a flag zero na ordem de menor tempo de entrada
-    return pagina[posicao].endereco;
+    // Retorna o identificador da primeira página com a flag zero na ordem de menor tempo de entrada
+    return pagina[posicao].identificador;
 
 }

@@ -117,10 +117,10 @@ int main(int argc, char** argv) {
         // Determina o tipo de operação lida
         if(rw == 'R') { 
             // Operação de leitura
-            pageFault = MMU_lerEndereco((endereco >> bitsPagina));
+            pageFault = MMU_lerPagina((endereco >> bitsPagina));
         } else {
             // Operação de escrita
-            pageFault = MMU_escreverEndereco((endereco >> bitsPagina));
+            pageFault = MMU_escreverPagina((endereco >> bitsPagina));
         }
 
         if(pageFault) { // Se ocorreu um Page Fault na operação

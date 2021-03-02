@@ -10,7 +10,7 @@ extern unsigned* paginasNaMemoria;
 // Tipo de dados auxiliar criado para ajudar na ordenação
 typedef struct AuxPagina {
     unsigned tempo;
-    unsigned endereco;
+    unsigned identificador;
 } AuxPagina;
 
 // Comparador utilizado para a ordenação
@@ -28,7 +28,7 @@ unsigned novo() {
     // Preenche o vetor alocado
     for(unsigned I=0; I<paginasOcupadas; I++) {
         aux_pagina[I].tempo = tabelaPaginas[paginasNaMemoria[I]].tempoEntrada;
-        aux_pagina[I].endereco = paginasNaMemoria[I];
+        aux_pagina[I].identificador = paginasNaMemoria[I];
     }
 
     // Ordena esse vetor pelo tempo de entrada
@@ -38,5 +38,5 @@ unsigned novo() {
     unsigned k = rand() % paginasOcupadas;
     
     // Retorna o k-esimo elemento do vetor ordenado por tempo de entrada
-    return aux_pagina[k].endereco;
+    return aux_pagina[k].identificador;
 }
