@@ -79,6 +79,11 @@ int main(int argc, char** argv) {
     // Abre o arquivo que contém as operações de memória a serem realizadas
     FILE* arquivo = fopen(arquivoEntrada, "r");
 
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo de entrada.\n");
+        return -1;
+    }
+
     printf("Executando o simulador...\n");
 
     // Inicializa variáveis utilizadas no loop de processamento da entrada 
@@ -89,10 +94,18 @@ int main(int argc, char** argv) {
     // Registra o tempo no início da execução do programa
     clock_t inicio = clock();
 
-    // Trata uma ação na memória lida da entrada
-    int valScan = fscanf(arquivo, "%x %c\n", &endereco, &rw);
+    // Variáveis para a leitura do arquivo
+    char * linha = NULL;
+    size_t tam = 0;
 
-    while(valScan && valScan != EOF) {
+    // Trata uma ação na memória lida da entrada
+    while(getline(&linha, &tam, arquivo) != -1) {
+
+        // Verifica se a linha lida está no formato esperado
+        if(sscanf(linha, "%x %c\n", &endereco, &rw) != 2) {
+            printf("Erro de formato na leitura do arquivo da entrada.\n");
+            return -1;
+        }
 
         // Determina se houve um Page Fault
         short pageFault = 0;
@@ -114,7 +127,6 @@ int main(int argc, char** argv) {
             contadorPageFaults++;
         }
 
-        valScan = fscanf(arquivo, "%x %c\n", &endereco, &rw);
     }
 
     // Registra o tempo no fim da execução do programa
@@ -139,9 +151,9 @@ int main(int argc, char** argv) {
     printf("Tempo de Execucao: %lf\n", tempoGasto);
     printf("Tabelas:\n\n");
     printf("Tabela Inicio:\n");
-    //printf("%s\n", printsTabelas[0]);
+    printf("%s\n", printsTabelas[0]);
     printf("Tabela Fim:\n");
-    //printf("%s", printsTabelas[1]);
+    printf("%s", printsTabelas[1]);
 
     // Libera as memórias alocadas dinamicamente
     for(unsigned I=0; I<2; I++) {

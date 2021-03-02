@@ -4,6 +4,7 @@
 
 // Variáveis da tabela de páginas utilizadas
 extern unsigned paginasOcupadas;
+extern EntradaTabela* tabelaPaginas;
 extern unsigned* paginasNaMemoria;
 
 // Tipo de dados auxiliar criado para ajudar na ordenação
@@ -31,11 +32,11 @@ unsigned novo() {
     }
 
     // Ordena esse vetor pelo tempo de entrada
-    qsort(aux_pagina, paginasOcupadas, sizeof(unsigned), comparacao);
+    qsort(aux_pagina, paginasOcupadas, sizeof(AuxPagina), comparacao);
 
     // Sorteia um número k aleatório 
     unsigned k = rand() % paginasOcupadas;
-
+    
     // Retorna o k-esimo elemento do vetor ordenado por tempo de entrada
     return aux_pagina[k].endereco;
 }
