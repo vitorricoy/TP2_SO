@@ -34,7 +34,7 @@ void TabelaPaginas_inicializar(unsigned tamMem, unsigned tamPag, unsigned numPag
         tabelaPaginas[I].valido = 0;
     }
 
-    // Aloca a tabela de páginas reversa que contém o endereço das páginas salvas em cada posição da memória
+    // Aloca a tabela de páginas reversa que contém o identificador das páginas salvas em cada posição da memória
     paginasNaMemoria = (unsigned*) malloc(numeroPaginasMemoria*sizeof(unsigned));
 
     if(paginasNaMemoria == NULL) {
