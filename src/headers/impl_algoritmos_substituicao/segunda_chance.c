@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "segunda_chance.h"
 #include "../tabela_paginas.h"
 
@@ -25,6 +26,11 @@ unsigned segundaChance() {
 
     // Aloca o vetor das páginas na memória com as informações necessárias
     AuxPagina* vetorPaginas = (AuxPagina*) malloc(paginasOcupadas * sizeof(AuxPagina));
+
+    if(vetorPaginas == NULL) {
+        printf("Erro ao alocar o vetor de páginas para o algoritmo de segunda chance\n");
+        exit(-1);
+    }
 
     // Preenche o vetor alocado
     for(unsigned I=0; I<paginasOcupadas; I++) {

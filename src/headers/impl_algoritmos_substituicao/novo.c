@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "novo.h"
 #include "../tabela_paginas.h"
 
@@ -25,6 +26,11 @@ unsigned novo() {
 
     // Aloca o vetor das páginas na memória com as informações necessárias
     AuxPagina* auxPagina = (AuxPagina*) malloc(paginasOcupadas * sizeof(AuxPagina));
+
+    if(auxPagina == NULL) {
+        printf("Erro ao alocar o vetor de páginas para o algoritmo de substituicao\n");
+        exit(-1);
+    }
 
     // Preenche o vetor alocado
     for(unsigned I=0; I<paginasOcupadas; I++) {

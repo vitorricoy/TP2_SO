@@ -19,6 +19,11 @@ void TabelaPaginas_inicializar(unsigned tamMem, unsigned tamPag, unsigned numPag
     // Aloca a tabela de páginas
     tabelaPaginas = (EntradaTabela*) malloc(numPag*sizeof(EntradaTabela));
 
+    if(tabelaPaginas == NULL) {
+        printf("Erro na alocacao da tabela de paginas\n");
+        exit(-1);
+    }
+
     // Inicializa a tabela de páginas alocada
     for(unsigned I=0; I<numPag; I++) {
         tabelaPaginas[I].posicaoMemoria = 0;
@@ -31,6 +36,11 @@ void TabelaPaginas_inicializar(unsigned tamMem, unsigned tamPag, unsigned numPag
 
     // Aloca a tabela de páginas reversa que contém o endereço das páginas salvas em cada posição da memória
     paginasNaMemoria = (unsigned*) malloc(numeroPaginasMemoria*sizeof(unsigned));
+
+    if(paginasNaMemoria == NULL) {
+        printf("Erro na alocacao da tabela de paginas reversa\n");
+        exit(-1);
+    }
 
     // Inicializa a tabela de páginas reversa
     for(unsigned I=0; I<numeroPaginasMemoria; I++) {
