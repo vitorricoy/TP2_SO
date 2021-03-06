@@ -132,10 +132,11 @@ void TabelaPaginas_preencherStringTabelaPaginas(char* string) {
     // Guarda a tabela de páginas formatada em 'string'
     char* temp = string;
     int v = 0;
-    v = sprintf(temp , "Pagina     Valido   Sujo   Tempo Entrada  Segunda Chance  Tempo do Ultimo Acesso\n");
+    v = sprintf(temp , "Frame      Pagina     Valido   Sujo   Tempo Entrada  Segunda Chance  Tempo do Ultimo Acesso\n");
     temp+=v;
-    for(unsigned I=0; I<numeroPaginas; I++) {
-        v = snprintf(temp, 91*sizeof(char), "0x%08x %hd        %hd      %-13u  %hd               %-10u\n", I, tabelaPaginas[I].valido, tabelaPaginas[I].sujo, tabelaPaginas[I].tempoEntrada, tabelaPaginas[I].segundaChance, tabelaPaginas[I].ultimoAcesso);
+    for(unsigned I=0; I<paginasOcupadas; I++) {
+        int idPagina = paginasNaMemoria[I];
+        v = snprintf(temp, 101*sizeof(char), "0x%08x 0x%08x %hd        %hd      %-13u  %hd               %-10u\n", I, idPagina, tabelaPaginas[idPagina].valido, tabelaPaginas[idPagina].sujo, tabelaPaginas[idPagina].tempoEntrada, tabelaPaginas[idPagina].segundaChance, tabelaPaginas[idPagina].ultimoAcesso);
         temp+=v;
     }
 }
