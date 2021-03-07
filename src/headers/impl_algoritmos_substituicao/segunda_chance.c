@@ -7,6 +7,7 @@
 extern unsigned paginasOcupadas;
 extern EntradaTabela* tabelaPaginas;
 extern unsigned* paginasNaMemoria;
+extern unsigned contadorOperacoes;
 
 // Tipo de dados auxiliar criado para ajudar na ordenação
 typedef struct AuxPagina {
@@ -49,6 +50,9 @@ unsigned segundaChance() {
         // Marca a flag como usada em ambos arrays
         tabelaPaginas[vetorPaginas[posicao].identificador].segundaChance = 0;
         vetorPaginas[posicao].referencia = 0;
+
+        // Atualiza o tempo de chegada as páginas que receberam a segunda chance
+        tabelaPaginas[vetorPaginas[posicao].identificador].tempoEntrada = contadorOperacoes++;
 
         // Vai para a próxima posição de forma circular
         posicao = (posicao + 1) % paginasOcupadas;
