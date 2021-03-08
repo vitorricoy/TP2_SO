@@ -51,7 +51,7 @@ unsigned segundaChance() {
         tabelaPaginas[vetorPaginas[posicao].identificador].segundaChance = 0;
         vetorPaginas[posicao].referencia = 0;
 
-        // Atualiza o tempo de chegada as páginas que receberam a segunda chance
+        // Atualiza o tempo de chegada das páginas que receberam a segunda chance
         tabelaPaginas[vetorPaginas[posicao].identificador].tempoEntrada = contadorOperacoes++;
 
         // Vai para a próxima posição de forma circular
